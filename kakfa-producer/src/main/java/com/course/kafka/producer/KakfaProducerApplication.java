@@ -9,15 +9,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 import com.course.kafka.producer.entity.Employee;
+import com.course.kafka.producer.entity.Student;
 import com.course.kafka.producer.produce.EmployeeJSONKafkaProducer;
 import com.course.kafka.producer.produce.HelloWorldKafkaProducer;
+import com.course.kafka.producer.produce.StudentKafkaProducer;
 
 @SpringBootApplication
 //@EnableScheduling
 public class KakfaProducerApplication implements CommandLineRunner{
 	
 	@Autowired
-	private EmployeeJSONKafkaProducer employeeJSONKafkaProducer;
+	private StudentKafkaProducer studentKafkaProducer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(KakfaProducerApplication.class, args);
@@ -25,8 +27,8 @@ public class KakfaProducerApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		employeeJSONKafkaProducer.sendMessage(new Employee("employee 1", "Employee Name", LocalDate.now()));
-		
+		studentKafkaProducer.sendMessage(new Student("Student 1", 15, System.currentTimeMillis()));
+		studentKafkaProducer.sendMessage(new Student("Student 2", 17, System.currentTimeMillis()));
 	}
 
 }

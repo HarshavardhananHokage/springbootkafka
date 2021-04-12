@@ -1,10 +1,11 @@
-package com.course.kafka.producer.entity;
+package com.course.kafka.consumer.entity;
 
 import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
-import com.course.kafka.producer.json.CustomLocalDateSerializer;
+import com.course.kafka.consumer.json.CustomLocalDateDeserializer;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class Employee {
 
@@ -14,8 +15,12 @@ public class Employee {
 	private String name;
 	
 	@JsonProperty("birth_date")
-	@JsonSerialize(using = CustomLocalDateSerializer.class)
+	@JsonDeserialize(using = CustomLocalDateDeserializer.class)
 	private LocalDate birthDate;
+	
+	public Employee() {
+		
+	}
 
 	public Employee(String employeeId, String name, LocalDate birthDate) {
 		super();
@@ -48,4 +53,10 @@ public class Employee {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", birthDate=" + birthDate + "]";
+	}
+
+	
 }
